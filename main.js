@@ -53,7 +53,7 @@ const misPodrutos = [
         nombre: "Fuente de alimentacion",
         imagen: "https://http2.mlstatic.com/D_NQ_NP_772735-MLA47308429234_082021-O.webp",
         precio: 5550,
-        descripcion: "Fuente de alimentacion 12v 5A para cctv soporta hasta 5 camaras",
+        descripcion: "Fuente switch de alimentacion 12v 5A para cctv soporta hasta 5 camaras ",
     } 
 ]
 
@@ -69,7 +69,7 @@ function brindarProductos(prods){
         <div class="card-body">
             <h4 class="card-title ">${prod.nombre}</h4>
             <p class="card-text">$ ${prod.precio} <br> ${prod.descripcion}</p>
-            <button id=${prod.id} class="btn btn-success container text-center  compra">comprar</button>
+            <button id=${prod.id} class="btn btn-success container text-center  compra">Agregar al Carrito</button>
         </div>
      </div> 
         `;
@@ -79,54 +79,32 @@ function brindarProductos(prods){
     let botones = document.getElementsByClassName("compra");
     for (const boton of botones) {
         boton.onclick = () =>{
-            const prodcACarro = misPodrutos.find((producto) => producto.id == boton.id);
-            console.log(prodcACarro);
+            const producACarro = misPodrutos.find((producto) => producto.id == boton.id);
+            console.log(producACarro);
             
-           // agregarAcarrito(prodcACarro);
+           agregarAcarrito(producACarro);
         }
         
     }
 }
 brindarProductos(misPodrutos);
+//carrito de compras
 
+function agregarAcarrito (producto) {
+    let alCarro = carrito.reduce((acumulador, producto)=> acumulador + producto.precio, 0);
+    carrito.push(producto);
+    tablaCarrito.innerHTML += `
+   
+ <table class="table">
+    
+    <tbody>
+        <td>${producto.nombre}</td>
+        <td>${producto.precio}</td>
+        <td>${producto.id}</td>
+    
+    </tbody>
+</table>
+    `; 
+    
+};
 
-{/* <table class="w-100">
-<th>producto</th>
-<th>precio</th>
-<th>id</th>
-<tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-</tr>
-<tr>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-</tr>
-<tr>
-    <td>7</td>
-    <td>8</td>
-    <td>9</td>
-</tr>
-</table> */}
-
-
-
-
-
-
-
-
-
-/* let div =document.getElementById("app");
-let parrafo = document.getElementById("parrafo1");
-let cartas = document.getElementById("cards");
-
-//div.innerText = "Clase de dom 🤓"
-div.style.background="blue";
-div.style.fontSize="40px";
-
-let parrafos = document.getElementsByTagName("p");
-
-console.log(parrafos); */
