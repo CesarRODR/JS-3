@@ -57,8 +57,10 @@ const misPodrutos = [
     } 
 ]
 
+
 let contDeProductos = document.getElementById("losproductos");
-//carritpo de compras
+let miCarrito = document.getElementById("carrito-contenedor");
+
 const carrito = [];
 
 function brindarProductos(prods){
@@ -87,24 +89,37 @@ function brindarProductos(prods){
         
     }
 }
-brindarProductos(misPodrutos);
-//carrito de compras
+           brindarProductos(misPodrutos);
 
-function agregarAcarrito (producto) {
-    let alCarro = carrito.reduce((acumulador, producto)=> acumulador + producto.precio, 0);
-    carrito.push(producto);
-    tablaCarrito.innerHTML += `
-   
- <table class="table">
+//carrito de compras
+    function agregarAcarrito (producto) {
+        let alCarro = carrito.reduce((acumulador, producto)=> acumulador + producto.precio, 0);
+        carrito.push(producto);
+        tablaCarrito.innerHTML += `     
     
-    <tbody>
-        <td>${producto.nombre}</td>
-        <td>${producto.precio}</td>
-        <td>${producto.id}</td>
+            <table class="table">
     
-    </tbody>
-</table>
-    `; 
+                 <tbody>
+                    <td>${producto.nombre}</td>
+                    <td>${producto.precio}</td>
+                    <td>${producto.id}</td>
     
+                </tbody>
+            </table>`; 
+    
+    precioTotal+=producto.precio;
+            totalActual();
+            saveLocal();
 };
 
+let precioTotal=0;
+    function totalActual(){
+        const todoElTotal = document.getElementById("total");
+        todoElTotal.innerHTML = "El precio total es: $" + precioTotal;
+};
+    //local storage para el carrito
+    const saveLocal = () =>{
+       localStorage.setItem("carrito", JSON.stringify(carrito)); 
+    }
+    
+ 
